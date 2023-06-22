@@ -23,6 +23,13 @@ def insert_product(v):
     conn.commit()
     return "Product Successfully Added."
 
+def insert_sale(s):
+    vs = str(s)
+    q = "insert into sales(pid,quantity,created_at) "+"values"+ vs
+    cur.execute(q)
+    conn.commit()
+    return "Sale Successfully Added."
+
 def fetch_last_data(tbln):
     try:
         q = "SELECT * FROM " + tbln + " ORDER BY id desc LIMIT 1;"
