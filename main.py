@@ -1,5 +1,5 @@
-from flask import Flask, render_template
-from mypgfiles import fetch_data
+from flask import Flask, render_template,redirect,request
+from mypgfiles import fetch_data, insert_product
 
 
 # # # Create object called app
@@ -23,6 +23,24 @@ def home():
 def products():
     prods=fetch_data("products")
     return render_template('products.html', products=prods)
+
+@app.route("/add_products", methods=["POST","GET"])
+def add_products():
+    if request.method == "POST":
+        name=request.form["name"]
+        buying_price=request.form["buying_price"]
+        selling_price=request.form["selling_price"]
+        stock_quantity=request.form["stock_quantity"]
+        print(name)
+        print(buying_price)
+        print(selling_price)
+        print(stock_quantity)
+        product = (name,buying_price,selling_price,stock_quantity)
+        insert_product(product)
+        return redirect("/products")
+
+
+
 
 
 app.run()

@@ -18,17 +18,16 @@ def fetch_data(tbln):
     
 def insert_product(v):
     vs = str(v)
-    q = "insert into products(name,buying_price,selling_price,stock_quantity) "\
-        "values"+ vs
+    q = "insert into products(name,buying_price,selling_price,quanttity) "+"values"+ vs
     cur.execute(q)
     conn.commit()
     return "Product Successfully Added."
 
-# def fetch_last_data(tbln):
-#     try:
-#         q = "SELECT * FROM " + tbln + " ORDER BY id desc LIMIT 1;"
-#         cur.execute(q)
-#         records = cur.fetchall()
-#         return records
-#     except Exception as e:
-#         return e
+def fetch_last_data(tbln):
+    try:
+        q = "SELECT * FROM " + tbln + " ORDER BY id desc LIMIT 1;"
+        cur.execute(q)
+        records = cur.fetchall()
+        return records
+    except Exception as e:
+        return e
