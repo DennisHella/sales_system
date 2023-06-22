@@ -50,11 +50,9 @@ def add_sales():
     if request.method == "POST":
         product_id=request.form["product_id"]
         quantity=request.form["quantity"]
-        time_created=request.form["created_at"]
         print(product_id)
         print(quantity)
-        print(time_created)
-        sales= (product_id,quantity,time_created)
+        sales= (product_id,quantity,"now()")
         insert_sale(sales)
         return redirect("/sales")
 
