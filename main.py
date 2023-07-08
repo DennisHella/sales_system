@@ -1,5 +1,6 @@
 from flask import Flask, render_template,redirect,request
-from mypgfiles import fetch_data, insert_product, insert_sale
+from mypgfiles import fetch_data, insert_product, insert_sale, sales_per_day
+import pygal
 
 
 # # # Create object called app
@@ -22,12 +23,32 @@ def home():
 @app.route("/products")
 def products():
     prods=fetch_data("products")
-    return render_template('products.html', products=prods)
+    return render_template('products.html', prods=prods)
 
 @app.route("/sales")
 def sales():
     sold=fetch_data("sales")
     return render_template('sales.html', sales=sold)
+
+@app.route("/dashboards")
+def dashboards():
+    daily_sales = sales_per_day()
+    dates = []
+    sales =[]
+    for i in daily_sales:
+        dates.append(i[0])
+        sales.append(i[0])
+    print(sales)
+    print(dates)
+    chart = pygal.Line()
+    chart.title = 'Sales per Day'
+    chart.x_labels = dates
+    # chart.y_labels = sales
+    chart.add("Sales",sales)
+    chart=chart.render_data_uri()
+    return render_template("dashboard.html", chart=chart)
+   
+
 
 @app.route("/add_products", methods=["POST","GET"])
 def add_products():
@@ -56,8 +77,9 @@ def add_sales():
         insert_sale(sales)
         return redirect("/sales")
 
-
-
+# @app.route("/register", methods=["GET","POST"])
+# def register():
+    
 
 
 app.run(debug=True)

@@ -30,6 +30,12 @@ def insert_sale(s):
     conn.commit()
     return "Sale Successfully Added."
 
+def sales_per_day():
+    q= "Select created_at,SUM(quantity) as total_sales from sales GROUP BY created_at ORDER BY created_at"
+    cur.execute(q)
+    results=cur.fetchall()
+    return results
+
 def fetch_last_data(tbln):
     try:
         q = "SELECT * FROM " + tbln + " ORDER BY id desc LIMIT 1;"
