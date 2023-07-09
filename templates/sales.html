@@ -154,6 +154,7 @@
                             <td>{{ i[1]}}</td>
                             <td>{{ i[2]}}</td>
                             <td>{{ i[3]}}</td>
+                            <!--Update Button-->
                             <td>
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                 data-bs-target="#updateModal">Update Product</button>
@@ -169,14 +170,24 @@
                                         <div class="modal-body">
                                             <form action="/add_sales" method="post">
                                                 <div class="mb-3">
-                                                    <label for="exampleInputID" class="form-label">Product Id</label>
+                                                    <label for="exampleInputID" class="form-label">ID</label>
+                                                    <input type="hidden" name="product_id" class="form-control"
+                                                        id="updateModalLabel">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="exampleInputID" class="form-label">Product ID</label>
                                                     <input type="text" name="product_id" class="form-control"
-                                                        id="exampleInputPassword1">
+                                                        id="updateModalLabel">
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="exampleInputID" class="form-label">Quantity</label>
                                                     <input type="number" name="quantity" class="form-control"
-                                                        id="exampleInputPassword1">
+                                                        id="updateModalLabel">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="exampleInputID" class="form-label">Time</label>
+                                                    <input type="hidden" name="product_id" class="form-control"
+                                                        id="updateModalLabel">
                                                 </div>
                                            
                                                 <input type="submit" class ="btn btn-primary">

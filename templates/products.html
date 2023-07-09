@@ -152,45 +152,50 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for i in prods %}
+                        {% for row in prods %}
                         <tr>
-                            <th scope="row">{{ i[0]}}</th>
-                            <td>{{ i[1]}}</td>
-                            <td>{{ i[2]}}</td>
-                            <td>{{ i[3]}}</td>
-                            <td>{{ i[4]}}</td>
+                            <th scope="row">{{ row[0]}}</th>
+                            <td>{{ row[1]}}</td>
+                            <td>{{ row[2]}}</td>
+                            <td>{{ row[3]}}</td>
+                            <td>{{ row[4]}}</td>
                             <td>
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#updateModal">Update Product</button>
-                                <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                data-bs-target="#updateModal{{row[0]}}">Update Product</button>
+                                <div class="modal fade" id="updateModal{{row[0]}}" tabindex="-1" aria-labelledby="exampleModalLabel"
                                 aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="updateModalLabel">Update Product:</h1>
+                                            <h1 class="modal-title fs-5" id="updateModalLabel{{row[0]}}">Update Product:{{row[0]}}</h1>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                 aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            <form action="/add_products" method="post">
+                                            <form action="/update_products" method="post">
+                                                <div class="mb-3">
+                                                    <label for="exampleInputID" class="form-label">Id</label>
+                                                    <input type="hidden" name="id_no" class="form-control" value = {{row[0]}}
+                                                        id="updateModalLabel">
+                                                </div>
                                                 <div class="mb-3">
                                                     <label for="exampleInputID" class="form-label">Name</label>
-                                                    <input type="text" name="name" class="form-control"
-                                                        id="exampleInputPassword1">
+                                                    <input type="text" name="name" class="form-control" value = {{row[1]}}
+                                                        id="updateModalLabel">
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="exampleInputID" class="form-label">Buying Price</label>
-                                                    <input type="number" name="buying_price" class="form-control"
-                                                        id="exampleInputPassword1">
+                                                    <input type="number" name="buying_price" class="form-control" value = {{row[2]}}
+                                                        id="updateModalLabel">
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="exampleInputID" class="form-label">Selling Price</label>
-                                                    <input type="number" name="selling_price" class="form-control"
-                                                        id="exampleInputPassword1">
+                                                    <input type="number" name="selling_price" class="form-control" value = {{row[3]}}
+                                                        id="updateModalLabel">
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="exampleInputID" class="form-label">Quantiy</label>
-                                                    <input type="number" name="stock_quantity" class="form-control"
+                                                    <label for="exampleInputID" class="form-label">Quantiy</label> 
+                                                    <input type="number" name="stock_quantity" class="form-control" value = {{row[4]}}
                                                         id="exampleInputPassword1">
                                                 </div>
                                                 <button type="submit" class ="btn btn-primary">Update</button>

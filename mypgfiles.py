@@ -23,6 +23,12 @@ def insert_product(v):
     conn.commit()
     return "Product Successfully Added."
 
+def updating_product(u):
+    q = "UPDATE products SET name = %s, buying_price = %s, selling_price = %s, stock_quantity =%s WHERE id = %s;"
+    cur.execute(q,u)
+    cur.commit()
+    return q
+
 def insert_sale(s):
     vs = str(s)
     q = "insert into sales(pid,quantity,created_at) "+"values"+ vs

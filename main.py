@@ -30,8 +30,9 @@ def sales():
     sold=fetch_data("sales")
     return render_template('sales.html', sales=sold)
 
-@app.route("/dashboards")
-def dashboards():
+@app.route("/login", methods=["POST","GET"])
+def login():
+    return render_template('login.html')
     daily_sales = sales_per_day()
     dates = []
     sales =[]
@@ -48,7 +49,9 @@ def dashboards():
     chart=chart.render_data_uri()
     return render_template("dashboard.html", chart=chart)
    
-
+@app.route("/register", methods=["POST","GET"])
+def register():
+    return render_template('register.html')
 
 @app.route("/add_products", methods=["POST","GET"])
 def add_products():
@@ -79,6 +82,18 @@ def add_sales():
 
 # @app.route("/register", methods=["GET","POST"])
 # def register():
+@app.route("/update_products", methods=["POST","GET"])
+def update_products():
+    if request.method=='POST':
+        id=request.form["id_no"]
+        name=request.form["name"]
+        buying_price=request.form["buying_price"]
+        selling_price=request.form["selling_price"]
+        quantity=request.form["stock_quantity"]
+        product=(id,name,buying_price,selling_price,quantity,)
+        updating_product(product)
+        return redirect("/products")
+           
     
 
 
